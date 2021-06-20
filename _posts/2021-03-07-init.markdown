@@ -5,11 +5,11 @@ date:   2021-06-01 00:00:00 +0000
 categories: jekyll update
 ---
 
-##Purpose
+## Purpose
 
 After a couple of decades of finding and making lots of things which I find interesting, it's time to see whether anyone else beyond [Jeremy Corbyn agrees](https://www.bbc.co.uk/news/uk-england-london-56281464).
 
-##Best Intentions
+## Best Intentions
 
 It's got to be said up-front that this site, and associated links, will be updated very sporadically. This will depend on how busy I've been: 
 
