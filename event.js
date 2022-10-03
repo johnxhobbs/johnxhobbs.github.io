@@ -1,13 +1,23 @@
+// Disable zooming of the window
+var viewportmeta = document.querySelector('meta[name="viewport"]');
+viewportmeta.content = 'user-scalable=NO, width=device-width, initial-scale=1.0'
 
 const limitNumberWithinRange = (num, min = 0, max = 100) => {
-    const parsed = parseInt(num);
-    return Math.min(Math.max(parsed, min), max);
+    return Math.min(Math.max(num, min), max);
   };
 
 // Pan behaviour: go right up to edge
 $('body').mousemove(function(e){
     var mousePosX = limitNumberWithinRange(0 + (e.pageX/$(window).width())*120 - 10);
     var mousePosY = limitNumberWithinRange(0 + (e.pageY/$(window).height())*120 - 10);
+    $('body').css('background-position', mousePosX + '% ' +  mousePosY + '%');
+});
+
+// Pan on mobile too
+$('body').touchmove(function(e){
+    var touch = e.touches[0];
+    var mousePosX = limitNumberWithinRange(0 + (touch.pageX/$(window).width())*120 - 10);
+    var mousePosY = limitNumberWithinRange(0 + (touch.pageY/$(window).height())*120 - 10);
     $('body').css('background-position', mousePosX + '% ' +  mousePosY + '%');
 });
 
