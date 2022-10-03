@@ -14,12 +14,14 @@ $('body').mousemove(function(e){
 });
 
 // Pan on mobile too
-$('body').touchmove(function(e){
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    var touch = e.touches[0];
     var touch = e.touches[0];
     var mousePosX = limitNumberWithinRange(0 + (touch.pageX/$(window).width())*120 - 10);
     var mousePosY = limitNumberWithinRange(0 + (touch.pageY/$(window).height())*120 - 10);
     $('body').css('background-position', mousePosX + '% ' +  mousePosY + '%');
-});
+}, false);
 
 // Set initial zoom to be zoom out
 var zoomedIn = false
