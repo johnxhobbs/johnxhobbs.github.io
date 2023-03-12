@@ -1,6 +1,4 @@
-// Disable zooming of the window
-var viewportmeta = document.querySelector('meta[name="viewport"]');
-viewportmeta.content = 'user-scalable=NO, width=device-width, initial-scale=1.0'
+var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 
 const limitNumberWithinRange = (num, min = 0, max = 100) => {
     return Math.min(Math.max(num, min), max);
@@ -13,16 +11,6 @@ $('body').mousemove(function(e){
     $('body').css('background-position', mousePosX + '% ' +  mousePosY + '%');
 });
 
-// Pan on mobile too
-document.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    var touch = e.touches[0];
-    var touch = e.touches[0];
-    var mousePosX = limitNumberWithinRange(0 + (touch.pageX/$(window).width())*120 - 10);
-    var mousePosY = limitNumberWithinRange(0 + (touch.pageY/$(window).height())*120 - 10);
-    $('body').css('background-position', mousePosX + '% ' +  mousePosY + '%');
-}, false);
-
 // Set initial zoom to be zoom out
 var zoomedIn = false
 $('body').click(function(e){
@@ -30,3 +18,17 @@ $('body').click(function(e){
     var zoomLevel = 110 + 110 * zoomedIn
     $('body').css('background-size', zoomLevel + '%');
 });
+
+var initialZoom = $('body').css('background-size')
+// Apple devices need to use gesture
+function zoom(e) {
+    console.log(initialZoom)
+    console.log(e.scale)
+    zoomLevel = initialZoom * (e.scale)
+    console.log(zoomLevel)
+    $('body').css('background-size', zoomLevel + '%');
+    e.preventDefault()
+  }
+  document.addEventListener('gesturestart', zoom)
+  document.addEventListener('gesturechange', zoom)
+  document.addEventListener('gestureend', zoom)
